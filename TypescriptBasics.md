@@ -145,3 +145,132 @@ En caso de que queramos omitir el uso de `tsconfig.json` podemos simplemente com
 ```bash	
 tsc file.ts
 ```
+
+## Tipado en TypeScript
+
+En typescript podemos definir variables de manera explícita, eso significa que debemos tomar en cuenta el tipo de dato que va a tener la variable. Pero también typescript tiene la capacidad de inferir el tipo de dato de una variable, es decir, si no se especifica el tipo de dato de la variable, typescript lo infiere.
+
+### Tipado Explícito
+
+```typescript	
+let a: number = 5;
+```
+
+`nombreVariable` `:` `tipoVariable`
+
+### Tipado Implícito
+
+```typescript
+let a = 5;
+```
+
+Typescript infiere el tipo de dato de `a` como `number`. La variable debe estar inicializada para que el tipo de dato pueda ser inferido.
+
+### Tipos primitivos
+
+- `number` : Valores numéricos, hexadecimales, binarios, octales.
+
+```typescript
+// Number
+// explicito
+
+let phone: number;
+phone = 1;
+phone = 5678903;
+
+// phone = 'hola'; // Error
+
+// Inferido
+let phoneNumber = 567890;
+phoneNumber = 123;
+// phoneNumber = true; // Error
+
+let hex: number = 0xf00d;
+let binary: number = 0b1010;
+let octal: number = 0o744;
+```
+
+- `boolean` : El tipo de dato más simple en typescript. Dos valores posibles: `true` o `false`.
+
+```typescript
+// Boolean
+// explicito
+let isAdmin: boolean;
+isAdmin = true;
+isAdmin = false;
+
+// Inferido
+let isAdmin = true;
+isAdmin = false;
+isAdmin = 'true'; // Error
+```
+
+- `string` : El tipo de dato para trabajar con dato textuales o cadenas de caracteres. Así como en javascript, se pueden usar comillas dobles ("") y simples ('') para definir cadenas de caracteres.
+
+```typescript
+// String
+// explicito
+let name: string;
+name = 'Juan';
+name = 'Juan Pérez';
+
+// Inferido
+let name = 'Juan';
+name = 'Juan Pérez';
+name = 123; // Error
+```
+
+- `template string` : Permite definir múltiples líneas de texto. Pueden contener expresiones o variables embebidas. Se debe usar el carácter backtick/backquote (\`) y para expresiones `${expr}`.
+
+```typescript
+// Template String
+let userName = 'Pepe';
+let firstName = 'Juan';
+let phone = '1234567890';
+let isAdmin = true;
+
+let userInfo = `
+    User info: 
+    username: ${username}
+    first name: ${firstName + ' Pérez'}
+    phone: ${phone}
+    isAdmin: ${isAdmin}
+`;
+console.log('userInfo', userInfo);
+```
+
+- `array`
+- `tuple`
+- `enum`
+
+- `any` : Usado para capturar valores dinámicos. Los valores pueden cambiar de tipo dependiendo del contexto. APIs externas, librerías de terceros, etc.
+
+En la practica `any` debe ser usado como último recurso, esperaríamos aplicarlo en caso de que no sepamos el tipo de la variable a priori.
+
+```typescript
+// any
+// explicito
+let idUser: any;
+idUser = 1; // Tipo: number
+idUser = '1'; // Tipo: string
+console.log('idUser', idUser);
+
+// Inferido
+let otherIdUser;
+otherIdUser = 1;
+otherIdUser = '1';
+console.log('otherIdUser', otherIdUser);
+
+let surprise: any = 'hello typescript';
+// surprise.sayHello(); // Error
+const res = surprise.substring(6); // Error
+console.log('res', res);
+```
+
+- `void` : Void es lo opuesto a any. Representa la ausencia de tipo. Comúnmente se usa como tipo de retorno de funciones.
+
+- `null`
+- `undefined`
+- `never`
+- `object`
+
