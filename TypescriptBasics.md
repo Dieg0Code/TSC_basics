@@ -303,8 +303,52 @@ Normalmente esto nos daría un error puesto que en nuestro archivo de configurac
 
 Esto no es recomendable, pero es posible. Nos sirve para entender que `null` y `undefined` son una especie de subtipo de `void`.
 
-- `null`
+- `null`: En Typescript, ambos valores `null` y `undefined` tienen sus respectivos tipos.
 - `undefined`
+
+```typescript
+// null y undefined
+// explicito
+let nullValue: null;
+nullValue = null;
+nullValue = 1; // Error
+
+let otherVariable = null; // lo infiere como any
+otherVariable = 'test'; // se puede porque el tipo de variable es any
+
+console.log('nullValue', nullValue);
+console.log('otherVariable', otherVariable);
+
+// undefined
+let undefinedValue: undefined = undefined;
+undefinedValue = 'test'; // Error
+
+let otherUndefinedValue = undefined; // lo infiere como any
+
+console.log('undefinedValue', undefinedValue);
+console.log('otherUndefinedValue', otherUndefinedValue);
+```
+
+`null` y `undefined` se pueden asumir como subtipos de los otros tipos de datos. Significa que podemos asignar `null` y `undefined` a variables de tipo `number` o `string`, por ejemplo.
+
+```typescript
+// null y undefined como subtipos
+
+// --strictNullChecks
+let albumName: string;
+// albumName = null; // Error
+// albumName = undefined; // Error
+```
+
+Una de las maneras más prácticas de solucionar problemas habituales cuando trabajamos con código javaScript consiste en evitar la asignación de valores `null` y `undefined` a variables. Typescript provee los mecanismos necesarios para evitar esto, una de las formas consiste en utilizar el parámetro `strictNullChecks` en la configuración del archivo de configuración, con lo cual el compilador verifica que no se está asignando un valor `null` o `undefined` a una variable.
+
+```bash
+tsc file.ts --strictNullChecks
+```
+
+Nos devuelve un reporte de todas las lineas en las que se encontró una asignación de valor `null` o `undefined` a una variable.
+
+Esto se hace porque cuando se asignan valores `null` o `undefined` a variables el código se vuelve propenso a producir errores.
 
 - `never` : Representa el tipo de valor que nunca ocurre. Se usa en funciones que lanzan excepciones o en funciones que nunca retornan un valor.
 
