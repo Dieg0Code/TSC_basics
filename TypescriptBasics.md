@@ -136,13 +136,13 @@ tsc # typescript empieza a buscar el archivo tsconfig.json en el directorio actu
 
 También podemos usar el parámetro `--project` para indicar el directorio donde se encuentra el archivo `tsconfig.json`
 
-```bash	
+```bash
 tsc --project tscBasics
 ```
 
 En caso de que queramos omitir el uso de `tsconfig.json` podemos simplemente compilar un archivo de tipo `.ts` directamente.
 
-```bash	
+```bash
 tsc file.ts
 ```
 
@@ -152,7 +152,7 @@ En typescript podemos definir variables de manera explícita, eso significa que 
 
 ### Tipado Explícito
 
-```typescript	
+```typescript
 let a: number = 5;
 ```
 
@@ -269,8 +269,70 @@ console.log('res', res);
 
 - `void` : Void es lo opuesto a any. Representa la ausencia de tipo. Comúnmente se usa como tipo de retorno de funciones.
 
+```typescript
+// void
+// explicito
+function showInfo(user: any): void {
+    console.log('user info', user.id, user.userName, user.firstName);
+}
+
+showInfo({ id: 1, userName: 'Pepe', firstName: 'Juan' });
+
+// Inferido
+function showFormatedInfo(user: any) {
+    console.log('User info', `
+        id: ${user.id}
+        userName: ${user.userName}
+        firstName: ${user.firstName}
+    `);
+}
+
+showFormatedInfo({ id: 1, userName: 'Pepe', firstName: 'Juan' });
+```
+
+Una variable de tipo `void` no puede ser inicializada, se puede asignar unicamente como `null` o `undefined` como valores.
+
+```typescript
+// tipo void, como tipo de dato en variable
+let unusable: void;
+unusable = null;
+unusable = undefined;
+```
+
+Normalmente esto nos daría un error puesto que en nuestro archivo de configuración tenemos el modo `strict` en nuestro chequeo de tipos.
+
+Esto no es recomendable, pero es posible. Nos sirve para entender que `null` y `undefined` son una especie de subtipo de `void`.
+
 - `null`
 - `undefined`
-- `never`
+
+- `never` : Representa el tipo de valor que nunca ocurre. Se usa en funciones que lanzan excepciones o en funciones que nunca retornan un valor.
+
+```typescript
+// never
+// explicito
+function handleError(code: number, message: string): never {
+    // process your code
+    // generate a message
+    throw new Error(`${message}. Code: ${code}`);
+}
+
+try {
+    handleError(404, 'Not found');
+} catch (error) {
+}
+
+function sumNumbers(limit: number): never {
+    let sum = 0;
+    // infinit loop
+    while (true){
+        sum++;
+    }
+    // return sum;
+}
+
+sumNumbers(10); // never return sum, bc of infinit loop
+```
+
 - `object`
 
