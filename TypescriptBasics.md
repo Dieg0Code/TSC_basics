@@ -239,7 +239,35 @@ let userInfo = `
 console.log('userInfo', userInfo);
 ```
 
-- `array`
+- `array` : Al igual que en javascript, typescript permite definir arrays que contienen un conjunto de valores. Usa dos notaciones: `[]` y `Array<tipo>`
+
+```typescript
+// Array
+// explicito
+let numbers: number[] = [];
+numbers = [1, 2, 3];
+numbers = [1, '2', 3]; // Error
+
+// Inferido
+let otherNumbers = [1, 2, 3]; // number[]
+let otherNumbers = [1, '2', 3]; // Error
+
+// Array<tipo>
+let pictureTitles: Array<string>; // string[]
+pictureTitles = ['A', 'B', 'C'];
+
+// Accediendo a los valores en un array
+console.log('first number', numbers[0]);
+console.log('first title', pictureTitles[0]);
+
+// Propiedades en arrays
+console.log('length', pictureTitles.length);
+
+// Uso de funciones en arrays
+numbers.push(4); // Agrega el valor 4 al final del array
+pictureTitles.sort(); // Ordena los valores del array en este caso de forma alfabética
+```
+
 - `tuple`
 - `enum`
 
