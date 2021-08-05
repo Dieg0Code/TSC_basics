@@ -268,7 +268,38 @@ numbers.push(4); // Agrega el valor 4 al final del array
 pictureTitles.sort(); // Ordena los valores del array en este caso de forma alfabética
 ```
 
-- `tuple`
+- `tuple` : Una tupla en typescript es un array de elementos que están tipados. De esta manera cada vez que haya que insertar un elemento se validará que dicho elemento coincida con el tipo de dato establecido en la tupla. Las tuplas permiten expresar un array con un número específico de elementos.
+
+```typescript
+// Tuple
+// [1, 'user']
+let user: [number, string];
+user = [1, 'Juan'];
+
+console.log('user', user);
+console.log('username', user[1]);
+console.log('user name length', user[1].length); // esto no funciona con otro tipo de dato que no sean strings
+console.log('user id', user[0]); // aquí no funcionaria pedir el length
+
+// tuplas con varios valores
+// id, userName, isPro
+let userInfo: [number, string, boolean];
+userInfo = [2, 'Pedro', true];
+console.log('userInfo', userInfo);
+
+// array de tuplas
+let array: [number, string][] = []; // debe ser inicializada para poder usar propiedades como push
+array.push([1, 'Juan']); // 0
+array.push([2, 'Pedro']); // 1
+array.push([3, 'Antonio']); // 2
+
+// Uso de funciones en arrays
+// Antonio -> Antonio001
+
+array[2][1] = array[2][1].concat('001'); // Antonio001
+console.log('array', array);
+```
+
 - `enum`
 
 - `any` : Usado para capturar valores dinámicos. Los valores pueden cambiar de tipo dependiendo del contexto. APIs externas, librerías de terceros, etc.

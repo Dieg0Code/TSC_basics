@@ -1,1 +1,0 @@
-let otherVariable = null;
