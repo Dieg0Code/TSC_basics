@@ -342,6 +342,8 @@ let albumName: string;
 
 Una de las maneras más prácticas de solucionar problemas habituales cuando trabajamos con código javaScript consiste en evitar la asignación de valores `null` y `undefined` a variables. Typescript provee los mecanismos necesarios para evitar esto, una de las formas consiste en utilizar el parámetro `strictNullChecks` en la configuración del archivo de configuración, con lo cual el compilador verifica que no se está asignando un valor `null` o `undefined` a una variable.
 
+También podemos usar el parámetro `strictNullChecks` mediante la linea de comandos.
+
 ```bash
 tsc file.ts --strictNullChecks
 ```
@@ -378,5 +380,40 @@ function sumNumbers(limit: number): never {
 sumNumbers(10); // never return sum, bc of infinit loop
 ```
 
-- `object`
+- `object` : Es el tipo de dato que representa un valor no primitivo. Es el tipo para variable que no sea `number`, `string`, `boolean`, `undefined`, `null`, etc.
 
+```typescript
+// object
+// explicito
+let user: object;
+user = {}; // Object
+
+user = {
+    id: 1,
+    userName: 'Pepe',
+    firstName: 'Juan',
+    isPro: true
+};
+
+console.log('user', user);
+// Object vs object(Clase JS vs tipo TS)
+const myObj = { // inferido como clase es decir tipo Object
+    id: 1,
+    userName: 'Pepe',
+    firstName: 'Juan',
+    isPro: true
+};
+
+const isInstance = myObj instanceof Object; // true
+
+console.log('user.userName', myObj.userName);
+
+// console.log('user.userName', user.userName); // Error property 'userName' does not exist on type 'object'.
+```
+
+#### `Object` vs `object`
+
+- `Object` : Instancia de la clase `Object` de javascript.
+- `object` : Tipo para valores no primitivos. Con este tipo no se puede acceder a las propiedades del objeto.
+
+En resumen, la principal diferencia entre `Object` y `object` es que `Object` es una clase de javascript, mientras que `object` es un tipo de dato.
