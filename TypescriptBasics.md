@@ -300,7 +300,49 @@ array[2][1] = array[2][1].concat('001'); // Antonio001
 console.log('array', array);
 ```
 
-- `enum`
+- `enum` : Los enumerados permiten definir un conjunto de constantes con nombre. Tiene la ventaja de adaptarse al contexto de la aplicación.
+
+```typescript
+// Enum
+// Orientación para fotografiás
+// const landscape = 0;
+// const portrait = 1;
+// const square = 2;
+// const panorama = 3;
+
+enum PhotoOrientation {
+    Landscape = 0, // 0
+    Portrait = 1, // 1
+    Square = 2, // 2
+    Panorama = 3 // 3
+}
+
+const landscape: PhotoOrientation = PhotoOrientation.Landscape;
+console.log('landscape', landscape); // landscape 0
+console.log('landscape', PhotoOrientation[landscape]);
+
+enum PictureOrientation {
+    Landscape = 10, // 10
+    Portrait, // 11
+    Square, // 12
+    Panorama // 13
+}
+
+// Siempre son valores consecutivos que se van incrementando de 1 en 1
+
+console.log('portrait', PictureOrientation.Portrait); // portrait 11
+
+enum Country {
+    Bolivia = 'bol',
+    Colombia = 'col',
+    México = 'mex',
+    EEUU = 'usa',
+    España = 'esp'
+}
+
+const country: Country = Country.Bolivia;
+console.log('country', country); // country bol
+```
 
 - `any` : Usado para capturar valores dinámicos. Los valores pueden cambiar de tipo dependiendo del contexto. APIs externas, librerías de terceros, etc.
 
