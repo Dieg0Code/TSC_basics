@@ -518,3 +518,63 @@ console.log('user.userName', myObj.userName);
 - `object` : Tipo para valores no primitivos. Con este tipo no se puede acceder a las propiedades del objeto.
 
 En resumen, la principal diferencia entre `Object` y `object` es que `Object` es una clase de javascript, mientras que `object` es un tipo de dato.
+
+## Union de Tipos, Alias y Tipos Literales
+
+### Union de Tipos
+
+- En `Typescript` se puede definir una variable con múltiples tipos de datos: *Union Type*.
+- Se usa el símbolo de pipe `|` entre tipos.
+
+```typescript
+// union type
+// 10, '10'
+let idUser: number | string;
+idUser = 10;
+idUser = '10';
+
+// Buscar username dado un id
+function getUsername(id: number | string) {
+    // Lógica de negocio, find the user
+    return 'Pepe';
+}
+
+getUsername(10); // 'Pepe'
+getUsername('10'); // 'Pepe'
+```
+
+### Alias de Tipos
+
+- Typescript permite crear un alias como nuevo nombre para un tipo.
+- El alias se puede aplicar también a un conjunto o combinación de tipos.
+- Se usa la palabra reservada `type` para crear alias.
+
+```typescript
+// alias
+// nos ayudan a evitar la redundancia en la union de tipos
+type IdUser = number | string;
+type UserName = string; // alias para el tipo string
+let idUser: IdUser;
+
+function getUsername(idUser: IdUser): UserName {
+    // Lógica de negocio, find the user
+    return 'Pepe';
+}
+
+getUsername(10); // 'Pepe'
+getUsername('10'); // 'Pepe'
+```
+
+### Tipos Literales
+
+- Una variable con un tipo literal pude contener únicamente una cadena de conjunto.
+- Se usan cadenas como "tipos", combinados con el símbolo de pipe `|` entre ellos.
+
+```typescript
+// Tipos Literales
+// 100x100, 500x500, 1000x1000
+type SquareSizes = '100x100' | '500x500' | '1000x1000';
+let smallPicture: SquareSizes = '100x100';
+// let smallPicture: SquareSizes = '200x200'; // Error
+let mediumPicture: SquareSizes = '500x500';
+```
