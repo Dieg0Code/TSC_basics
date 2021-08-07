@@ -724,3 +724,53 @@ showPicture({
 ```
 
 Una interfaz en Typescript es en cierto sentido como un tipo (como string, number, boolean, etc) mas "complejo", en el cual defines (como en enum un contrato) las propiedades y métodos que se deben cumplir en cualquier objeto que implemente dicha interfaz. La diferencia entre una interfaz y una clase es que en la interfaz solo hacemos mención de que esperamos de un objeto, en una clase mencionamos las propiedades (igual que en una interfaz) pero definimos los métodos (osea, especificamos que hará ese método, en la interfaz solo mencionamos el nombre de la función).
+
+### Interfaces Propiedades opcionales
+
+No todas las propiedades de una interfaz podrían ser requeridas.
+
+Establecemos una propiedad como opcional con el símbolo `?` después del nombre de la propiedad.
+
+```typescript
+interface PictureConfig {
+    title?: string;
+    date?: string;
+    orientation?: PhotoOrientation;
+}
+
+function generatePicture(config: PictureConfig) {
+    const pic = {title: 'default', date: '10/10/2016'}
+    if(config.title) {
+        pic.title = config.title;
+    }
+    if(config.date) {
+        pic.date = config.date;
+    }
+
+    return pic;
+}
+
+let picture = generatePicture({}); // {title: 'default', date: '10/10/2016'}
+picture = generatePicture({title: 'Travel pic'}); // {title: 'Travel pic', date: '10/10/2016'}
+picture = generatePicture({title: 'Travel pic' ,date: '17/17/2017'}); // {title: 'Travel pic', date: '17/17/2017'}
+```
+
+### Interfaces Propiedades de Solo Lectura
+
+Algunas propiedades de una interfaz pueden ser de solo lectura. Esto significa que no se puede cambiar su valor, pero si se puede acceder a su valor. Esto es posible usando `readonly` antes del nombre de la propiedad.
+
+```typescript
+// Interfaz Usuario
+interface User {
+    readonly id: number; // id es de solo lectura
+    userName: string;
+    isPro: boolean;
+}
+
+let user: User;
+user = {id: 1, userName: 'John', isPro: true};
+user.id = 2; // Error readonly property
+user.userName = 'Juan';
+```
+
+Esto es util ya que en ciertos casos no queremos que se modifiquen ciertos valores ya que estos pueden ser importantes como en el caso de una id de usuario en el contexto de una base de datos.
