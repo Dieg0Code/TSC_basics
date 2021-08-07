@@ -610,3 +610,73 @@ helloUser = 'hello paparazzi';
 userName = (helloUser as string).substring(6);
 console.log('userName', userName);
 ```
+
+## Funciones en TypeScript
+
+- Los parámetros en las funciones son tipados.
+- Se pueden definir parámetros opcionales.
+- El tipo de retorno puede ser un tipo básico, enum, alias, tipo literal o una combinación de ellos.
+
+```typescript
+// Funciones
+// crear una fotografía
+// JS
+function cratePictureJS(title, date, size) {
+    // los parámetros son de tipo any
+}
+
+type SquareSizes = '100x100' | '500x500' | '1000x1000';
+
+// TS
+function createPictureTS(title: string, date: string, size: SquareSizes) {
+    // Se crea una fotografía
+    console.log('create picture using', title, date, size);
+}
+
+cratePictureTS('My Birthday', '10/10/2016', '100x100');
+
+// Parámetros opcionales
+function createPictureTS(title?: string, date?: string, size?: SquareSizes) {
+    // Se crea una fotografía
+    console.log('create picture using', title, date, size);
+}
+
+// El símbolo ? es para indicar que el parámetro es opcional
+createPictureTS('My Birthday', '10/10/2016');
+createPictureTS('My Birthday');
+createPictureTS();
+// de esta forma se vuelve opcional pasar todos los parámetros
+
+// ES6, flat array functions
+let createPic = (title: string, date: string, size: SquareSizes): object => {
+    return { title, date, size };
+};
+
+const picture = createPic('My Birthday', '10/10/2016', '100x100');
+console.log('picture', picture);
+```
+
+Un parámetro opcional siempre debe ir añ final en el caso de que existan otros parámetros obligatorios.
+
+```typescript
+// Tipo de retorno con Typescript.
+
+function handleError(code: number, message: string): never | string {
+    // procesamiento del código, mensaje
+    if(message === 'error') {
+        throw new Error(`${message}. Code error ${code}`);
+    } else {
+        return 'an error has ocurred';
+    }
+}
+
+
+try {
+    let result = handleError(200, 'OK'); // string
+    console.log('result', result); // an error has occurred
+    result = handleError(404, 'error'); // never
+    console.log('result', result);
+} catch(error) {
+    
+}
+```
