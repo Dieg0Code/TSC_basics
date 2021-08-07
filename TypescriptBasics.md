@@ -677,6 +677,50 @@ try {
     result = handleError(404, 'error'); // never
     console.log('result', result);
 } catch(error) {
-    
+
 }
 ```
+
+## Interfaces
+
+Las interfaces en Typescript constituyen una forma poderosa de definir "contratos" tanto para tu proyecto, como para el código externo del mismo.
+
+```typescript
+// Interfaces
+// Función para mostrar una fotografía
+
+enum PhotoOrientation {
+    Landscape,
+    Portrait,
+    Square,
+    Panorama
+}
+
+interface Picture {
+    title: string;
+    date: string;
+    orientation: PhotoOrientation;
+}
+
+function showPicture(picture: Picture) {
+    console.log(`[title: ${picture.title},
+                    date: ${picture.date},
+                    orientation: ${picture.orientation}]`);
+}
+
+let myPic = {
+    title: 'My Birthday',
+    date: '10/10/2016',
+    orientation: PhotoOrientation.Landscape
+};
+
+showPicture(myPic);
+showPicture({
+    title: 'Test title',
+    date: '10/10/2016',
+    orientation: PhotoOrientation.Portrait,
+    // extra: 'extra' // Error
+});
+```
+
+Una interfaz en Typescript es en cierto sentido como un tipo (como string, number, boolean, etc) mas "complejo", en el cual defines (como en enum un contrato) las propiedades y métodos que se deben cumplir en cualquier objeto que implemente dicha interfaz. La diferencia entre una interfaz y una clase es que en la interfaz solo hacemos mención de que esperamos de un objeto, en una clase mencionamos las propiedades (igual que en una interfaz) pero definimos los métodos (osea, especificamos que hará ese método, en la interfaz solo mencionamos el nombre de la función).
