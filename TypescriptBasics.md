@@ -578,3 +578,35 @@ let smallPicture: SquareSizes = '100x100';
 // let smallPicture: SquareSizes = '200x200'; // Error
 let mediumPicture: SquareSizes = '500x500';
 ```
+
+## Aserciones de tipos
+
+Ademas de los tipos de datos, Typescript también provee un mecanismo para poder convertir estos tipos.
+
+- Cuando el programador conoce más que Typescript sobre el valor de una variable se hace necesario utilizar algún tipo de operador que me permita hacer una converción de tipos de datos.
+- Se parece al casting de tipos en otros lenguajes de programación. Sin embargo no es lo mismo puesto que Typescript no realiza ningún tipo de verificación y no afecta al tiempo de ejecución de la aplicación.
+- Usa dos sintaxis: `<Angle Bracket>` y `(variable as tipo)`
+
+```typescript
+// Aserciones de tipos
+// <tipo> Angle Bracket syntax
+let userName: any;
+userName = 'Pepe';
+
+// tenemos una cadena, TS confía en mi!
+let message: string = (<string>userName).length > 5 ? ` Welcome ${userName}`: 'Username is too short';
+console.log('message', message);
+
+let userNameWithId: any = 'luixaviles 1';
+// Como obtener el userName?
+userName = (<string>userNameWithId).substring(0, 10);
+console.log('userName', userName);
+
+// Sintaxis "as"
+let message = (userName as string).length > 5 ? ` Welcome ${userName}`: 'Username is too short';
+
+let helloUser: any;
+helloUser = 'hello paparazzi';
+userName = (helloUser as string).substring(6);
+console.log('userName', userName);
+```
