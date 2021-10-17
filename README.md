@@ -1,5 +1,7 @@
 # Typescript
 
+![TS Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png)
+
 ## ¿Qué es Typescript?
 
 Es un superconjunto tipado de JavaScript que permite la creación de programas que se pueden compilar a JavaScript.
