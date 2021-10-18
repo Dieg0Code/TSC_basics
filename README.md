@@ -649,7 +649,7 @@ createPictureTS('My Birthday');
 createPictureTS();
 // de esta forma se vuelve opcional pasar todos los parámetros
 
-// ES6, flat array functions
+// ES6, fat arrow function
 let createPic = (title: string, date: string, size: SquareSizes): object => {
     return { title, date, size };
 };
@@ -682,6 +682,8 @@ try {
 
 }
 ```
+
+![resumen](https://static.platzi.com/media/user_upload/Screen%20Shot%202020-07-18%20at%2012.16.38-ea16d15f-18a3-4476-adc4-49d669c279d0.jpg)
 
 ## Interfaces
 
@@ -779,4 +781,50 @@ Esto es util ya que en ciertos casos no queremos que se modifiquen ciertos valor
 
 ### Extendiendo Interfaces
 
-Las interfaces pueden
+Las interfaces pueden extenderse unas de otras. Esto permite copiar los miembros ya definidos en una interfaz a otra, ganando flexibilidad y reusabilidad de componentes.
+
+```Typescript
+export {};
+
+enum PhotoOrientation {
+    Landscape,
+    Portrait,
+    Square,
+    Panorama,
+}
+
+interface Entity {
+    id: number;
+    title: string;
+}
+
+interface Album extends Entity {
+    // copia de los atributos de Entity
+    description: string;
+}
+
+interface Picture extends Entity {
+    // copia de los atributos de Entity
+    orientation: PhotoOrientation;
+}
+
+const album: Album = {
+    id: 1,
+    title: 'Meetings',
+    description: 'Photos taken during meetings',
+};
+
+const picture: Picture = {
+    id: 2,
+    title: 'Family',
+    orientation: PhotoOrientation.Landscape,
+};
+
+let newPicture = {} as Picture;
+newPicture.id = 3;
+newPicture.title = 'Friends';
+
+console.log(album);
+console.log(picture);
+console.log(newPicture);
+```

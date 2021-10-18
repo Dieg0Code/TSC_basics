@@ -1,19 +1,42 @@
-// this function calculate how much days are you lived based on your birthday
-function daysLived(birthday: Date) {
-    let now = new Date();
-    let age = now.getFullYear() - birthday.getFullYear();
-    let m = now.getMonth() - birthday.getMonth();
-    let d = now.getDate() - birthday.getDate();
-    if (m < 0 || (m === 0 && d < 0)) {
-        age--;
-    }
-    return age * 365 + Math.floor(age / 4) - Math.floor(age / 100) + Math.floor(age / 400);
+export {};
 
+enum PhotoOrientation {
+    Landscape,
+    Portrait,
+    Square,
+    Panorama,
 }
 
-let birthday = new Date(1996, 2, 2);
-let days = daysLived(birthday); 
-console.log('Han pasaasdasdpppdoo',days);
-console.log('Han pasaasdasdpppdoo',days);
-console.log('Han pasaasdasdpppdoo1',days);
-console.log('Han pasaasdassdpppdoo2',days);
+interface Entity {
+    id: number;
+    title: string;
+}
+
+interface Album extends Entity {
+    // copia de los atributos de Entity
+    description: string;
+}
+
+interface Picture extends Entity {
+    // copia de los atributos de Entity
+    orientation: PhotoOrientation;
+}
+
+const album: Album = {
+    id: 1,
+    title: 'Meetings',
+    description: 'Photos taken during meetings',
+};
+
+const picture: Picture = {
+    id: 2,
+    title: 'Family',
+    orientation: PhotoOrientation.Landscape,
+};
+
+let newPicture = {} as Picture;
+newPicture.id = 3;
+newPicture.title = 'Friends';
+
+console.log(album, picture, newPicture);
+console.log('test');
