@@ -828,3 +828,9 @@ console.log(album);
 console.log(picture);
 console.log(newPicture);
 ```
+
+## Clases
+
+Se supone que estamos haciendo una aplicación para fotografias, en donde tenemos 4 entidades ``User``, ``Album``, ``Picture``, ``<\<enum>> PhotoOrientation``. Gracias al uso de ``clases`` y la ``programación orientada a objetos`` podemos lograr que esta entidades se relaciones de cierta forma.
+
+![poo](./img/poo.png)
