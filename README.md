@@ -1360,3 +1360,27 @@ y así se podría importar:
 ```typescript
 import { Item } from "@item";
 ```
+
+## Webpack y agrupación de módulos
+
+Webpack es una herramienta bastante habitual para el desarrollo de aplicaciones web, podemos hace uso de dicha y herramienta y poder configurar junto con nuestro proyecto, para el procesamiento de cada una de nuestras clases o los archivos typescript.
+
+Webpack se considera un empaquetador de módulos o ``bundler``, y que ademas permite la integración con diferentes plugins o herramientas adicionales de configuración.
+
+Para usar Webpack en nuestro proyecto, debemos generar un archivo ``package.json``, que nos va a servir para definir un script de inicialización de webpack y ademas nos permite contener las diferentes dependencias en modo desarrollo.
+
+```bash
+npm init -y
+```
+
+Instalacion de Typescript y Webpack:
+
+```bash
+npm install typescript webpack webpack-cli --save-dev
+```
+
+Por defecto Webpack no reconocera nuestros archivos typescript, por lo que debemos configurarlo:
+
+```bash
+npm install ts-loader --save-dev
+```
