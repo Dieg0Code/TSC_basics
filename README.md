@@ -1215,3 +1215,92 @@ console.log('PhotoOrientation', Picture.photoOrientation.Landscape);
 - ``protected``: atributo visible a nivel de clase y a nivel de quienes hereden de la clase con la palabra reservada ``extends``.
 - ``readonly``: atributo que solo puede ser leido, no puede ser modificado.
 - ``static``: para poder acceder a métodos/propiedades de una clase sin la necesidad de la instanciar.
+
+## Módulos en TypeScript
+
+Los módulos en Typescript proveen un mecanismo para una mejor organización del código y promueven su reutilización.
+
+A partir de ECMAScript 2015, los módulos son parte nativa del lenguaje JavaScript.
+
+### Importando y Exportando en Módulos
+
+Generalmente se define un módulo con la idea de agrupar código relacionado.
+
+Podemos tomar criterios en torno a la funcionalidad, features, utilitarios, modelos, etc.
+
+Los miembros de módulos interactúan con el uso de las palabras reservadas ``import`` y ``export``.
+
+```typescript
+//photoApp.ts
+export enum PhotoOrientation {
+    Landscape,
+    Portrait,
+    Square,
+    Panorama,
+}
+
+export class User {
+    private album: Album[];
+
+    constructor(
+        private id: number,
+        private username: string,
+        private firstName: string,
+        private isPro: boolean,
+    ) {
+        this.album = [];
+    }
+
+    addAlbum(album: Album) {
+        this.album.push(album);
+    }
+}
+
+export class Item {
+    constructor(public readonly id: number,
+        protected title: string) {
+    }
+}
+
+export class Album extends Item {
+    picture: Picture[];
+
+    constructor(id: number, title: string) {
+        super(id, title);
+        this.picture = [];
+    }
+
+    addPicture(picture: Picture) {
+        this.picture.push(picture);
+    }
+}
+
+export class Picture extends Item {
+    constructor(id: number,
+        title: string,
+        private _date: string,
+        private _orientation: PhotoOrientation) {
+        super(id, title);
+    }
+
+    toString(): string {
+        return `[id: ${this.id}, title: ${this.title}, orientation: ${this._orientation}]`;
+    }
+}
+```
+
+
+```typescript
+//main.ts
+import { Album, PhotoOrientation, Picture, User } from "./photoApp";
+
+const user = new User(1, 'pepe', 'Pedro', true);
+const album = new Album(10, 'Fotos de familia');
+const picture = new Picture(1, 'Fotos :)', '2021-02', PhotoOrientation.Landscape);
+
+// Creamos relaciones entre objetos
+user.addAlbum(album);
+album.addPicture(picture);
+
+console.log('user', user);
+```
