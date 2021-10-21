@@ -1304,3 +1304,9 @@ album.addPicture(picture);
 
 console.log('user', user);
 ```
+
+## Principio de Responsabilidad Única
+
+Idealmente, un archivo debería tener un proposito o responsabilidad única: definir una clase, una interfaz, un enumerado, etc.
+
+Esto mejora la legibilidad del código, facilita su lectura, testing y favorece su mantenimiento.
