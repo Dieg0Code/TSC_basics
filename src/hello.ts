@@ -1,4 +1,4 @@
-export {};
+export { }
 
 enum PhotoOrientation {
     Landscape,
@@ -7,36 +7,49 @@ enum PhotoOrientation {
     Panorama,
 }
 
-interface Entity {
+class Picture {
+    // Propiedades
     id: number;
     title: string;
-}
-
-interface Album extends Entity {
-    // copia de los atributos de Entity
-    description: string;
-}
-
-interface Picture extends Entity {
-    // copia de los atributos de Entity
     orientation: PhotoOrientation;
+
+    // Constructor
+    constructor(
+        id: number,
+        title: string,
+        orientation: PhotoOrientation
+    ) {
+        this.id = id;
+        this.title = title;
+        this.orientation = orientation;
+    }
+
+    // Métodos
+    toString() {
+        return `[id: ${this.id},
+             title: ${this.title}, 
+             orientation: ${this.orientation}]`;
+    }
 }
 
-const album: Album = {
-    id: 1,
-    title: 'Meetings',
-    description: 'Photos taken during meetings',
-};
+class Album {
+    id: number;
+    title: string;
+    pictures: Picture[];
 
-const picture: Picture = {
-    id: 2,
-    title: 'Family',
-    orientation: PhotoOrientation.Landscape,
-};
+    constructor(id: number, title: string) {
+        this.id = id;
+        this.title = title;
+        this.pictures = [];
+    }
 
-let newPicture = {} as Picture;
-newPicture.id = 3;
-newPicture.title = 'Friends';
+    addPicture(picture: Picture) {
+        this.pictures.push(picture);
+    }
+}
 
-console.log(album, picture, newPicture);
-console.log('test');
+const album: Album = new Album(1, 'Personal Pictures');
+const picture: Picture = new Picture(1, 'my photos', PhotoOrientation.Square);
+album.addPicture(picture);
+
+console.log('Album' ,album);

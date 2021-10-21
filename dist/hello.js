@@ -7,17 +7,31 @@ var PhotoOrientation;
     PhotoOrientation[PhotoOrientation["Square"] = 2] = "Square";
     PhotoOrientation[PhotoOrientation["Panorama"] = 3] = "Panorama";
 })(PhotoOrientation || (PhotoOrientation = {}));
-var album = {
-    id: 1,
-    title: 'Meetings',
-    description: 'Photos taken during meetings',
-};
-var picture = {
-    id: 2,
-    title: 'Family',
-    orientation: PhotoOrientation.Landscape,
-};
-var newPicture = {};
-newPicture.id = 3;
-newPicture.title = 'Friends';
-console.log(album, picture, newPicture);
+var Picture = /** @class */ (function () {
+    // Constructor
+    function Picture(id, title, orientation) {
+        this.id = id;
+        this.title = title;
+        this.orientation = orientation;
+    }
+    // Métodos
+    Picture.prototype.toString = function () {
+        return "[id: " + this.id + ",\n             title: " + this.title + ", \n             orientation: " + this.orientation + "]";
+    };
+    return Picture;
+}());
+var Album = /** @class */ (function () {
+    function Album(id, title) {
+        this.id = id;
+        this.title = title;
+        this.pictures = [];
+    }
+    Album.prototype.addPicture = function (picture) {
+        this.pictures.push(picture);
+    };
+    return Album;
+}());
+var album = new Album(1, 'Personal Pictures');
+var picture = new Picture(1, 'my photos', PhotoOrientation.Square);
+album.addPicture(picture);
+console.log('Album', album);

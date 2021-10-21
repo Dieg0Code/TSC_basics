@@ -831,6 +831,70 @@ console.log(newPicture);
 
 ## Clases
 
-Se supone que estamos haciendo una aplicación para fotografias, en donde tenemos 4 entidades ``User``, ``Album``, ``Picture``, ``<\<enum>> PhotoOrientation``. Gracias al uso de ``clases`` y la ``programación orientada a objetos`` podemos lograr que esta entidades se relaciones de cierta forma.
+Se supone que estamos haciendo una aplicación para fotografias, en donde tenemos 4 entidades ``User``, ``Album``, ``Picture``, ``<<enum>> PhotoOrientation``. Gracias al uso de ``clases`` y la ``programación orientada a objetos`` podemos lograr que esta entidades se relaciones de cierta forma.
 
 ![poo](./img/poo.png)
+
+### Definiendo Clases y Constructores
+
+A partir de ECMAScript 2015 es posible construir clases y hacer uso del paradigma de la Programación Orientada a Objetos en JavaScript.
+
+Typescript permite aplicar estas técnicas sin tener que esperar por otra versión.
+
+```typescript
+export { }
+
+enum PhotoOrientation {
+    Landscape,
+    Portrait,
+    Square,
+    Panorama,
+}
+
+class Picture {
+    // Propiedades
+    id: number;
+    title: string;
+    orientation: PhotoOrientation;
+
+    // Constructor
+    constructor(
+        id: number,
+        title: string,
+        orientation: PhotoOrientation
+    ) {
+        this.id = id;
+        this.title = title;
+        this.orientation = orientation;
+    }
+
+    // Métodos
+    toString() {
+        return `[id: ${this.id},
+             title: ${this.title}, 
+             orientation: ${this.orientation}]`;
+    }
+}
+
+class Album {
+    id: number;
+    title: string;
+    pictures: Picture[];
+
+    constructor(id: number, title: string) {
+        this.id = id;
+        this.title = title;
+        this.pictures = [];
+    }
+
+    addPicture(picture: Picture) {
+        this.pictures.push(picture);
+    }
+}
+
+const album: Album = new Album(1, 'Personal Pictures');
+const picture: Picture = new Picture(1, 'my photos', PhotoOrientation.Square);
+album.addPicture(picture);
+
+console.log('Album' ,album);
+```
