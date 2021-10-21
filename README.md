@@ -1310,3 +1310,37 @@ console.log('user', user);
 Idealmente, un archivo debería tener un proposito o responsabilidad única: definir una clase, una interfaz, un enumerado, etc.
 
 Esto mejora la legibilidad del código, facilita su lectura, testing y favorece su mantenimiento.
+
+## Resolviendo Módulos
+
+Typescript resuelve la ubicación de módulos observando referencias relativas y no relativas.
+
+Posteriormente intenta localizar el módulo usando una **estrategia de resolución de módulos**.
+
+### Estrategia de resolución de módulos
+
+La estrategia de resolución de módulos en typescript es completamente configurable.
+
+Podemos hacer uso del parámetro:
+
+```bash
+tsc --moduleResolution node
+```
+
+O
+
+```bash
+tsc --moduleResolution classic
+```
+
+![resolucion de modulos](./img/resolucion-de-modulos.png)
+
+Ejemplo de como usar una clase:
+
+![ejemplo relativo](./img/ejemplo-relativo.png)
+
+![ejemplo no relativo](./img/ejemplo-no-relativo.png)
+
+![node import relativo](./img/node-import-relativo.png)
+
+![node import no relativo](./img/node-import-no-relativo.png)
