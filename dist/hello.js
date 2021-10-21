@@ -35,3 +35,8 @@ var album = new Album(1, 'Personal Pictures');
 var picture = new Picture(1, 'my photos', PhotoOrientation.Square);
 album.addPicture(picture);
 console.log('Album', album);
+// Accediendo a los miembros públicos
+picture.id = 100; // public
+picture.title = 'Nuevo título'; // public
+album.title = 'Personal Activities'; // public
+console.log('Album', album);

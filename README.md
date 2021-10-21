@@ -898,3 +898,51 @@ album.addPicture(picture);
 
 console.log('Album' ,album);
 ```
+
+## Clases públicas y privadas
+
+Typescript define un modificador de acceso público por defecto para miembros de clase.
+
+También es posible marcar un miembro como público usando la palabra reservada ``public``.
+
+### Clases Miembros Privados
+
+Typescript define una **manera propia** de declarar o marcar un miembro como privado usando la palabra reservada ``private``.
+
+```typescript
+class Person {
+    private id: number;
+    private name: string;
+
+    public constructor(id: number, name: string) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public getName(): string {
+        return this.name;
+    }
+}
+```
+
+### Miembros Privados en ECMAScript
+
+Typescript también soporta (a partir de la version 3.8) la nueva sintaxis JavaScript para miembros privados: ``#atributo``
+
+Esta característica puede ofrecer mejores garantías de aislamiento en miembros privados.
+
+```typescript
+class Person {
+    #id: number;
+    #name: string;
+
+    public constructor(id: number, name: string) {
+        this.#id = id;
+        this.#name = name;
+    }
+
+    public getName(): string {
+        return this.#name;
+    }
+}
+```
