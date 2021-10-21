@@ -7,31 +7,18 @@ enum PhotoOrientation {
     Panorama,
 }
 
-// get y set
+// SuperClase
+abstract class Item {
+    protected readonly _id: number;
+    protected _title: string;
 
-class Picture {
-    // Propiedades
-    private _id: number;
-    private _title: string;
-    private _orientation: PhotoOrientation;
-
-    // Constructor
-    public constructor(
-        id: number,
-        title: string,
-        orientation: PhotoOrientation
-    ) {
+    constructor(id: number, title: string) {
         this._id = id;
         this._title = title;
-        this._orientation = orientation;
     }
 
     get id() {
         return this._id;
-    }
-
-    set id(id: number) {
-        this._id = id;
     }
 
     get title() {
@@ -40,6 +27,24 @@ class Picture {
 
     set title(title: string) {
         this._title = title;
+    }
+}
+
+// get y set
+
+class Picture extends Item {
+    public static photoOrientation = PhotoOrientation;
+    // Propiedades
+    private _orientation: PhotoOrientation;
+
+    // Constructor
+    public constructor(
+        id: number,
+        title: string,
+        orientation: PhotoOrientation
+    ) {
+        super(id, title);
+        this._orientation = orientation;
     }
 
     get orientation() {
@@ -58,20 +63,18 @@ class Picture {
     }
 }
 
-class Album {
-    public id: number;
-    public title: string;
-    public pictures: Picture[];
+class Album extends Item {
+    private _pictures: Picture[];
 
     public constructor(id: number, title: string) {
-        this.id = id;
-        this.title = title;
-        this.pictures = [];
+        super(id, title);
+        this._pictures = [];
     }
 
-    addPicture(picture: Picture) {
-        this.pictures.push(picture);
+    public addPicture(picture: Picture) {
+        this._pictures.push(picture);
     }
+    
 }
 
 const album: Album = new Album(1, 'Personal Pictures');
@@ -79,3 +82,12 @@ const picture: Picture = new Picture(1, 'my photos', PhotoOrientation.Square);
 album.addPicture(picture);
 
 console.log('Album' ,album);
+
+// Accediendo a los miembros publicos
+console.log('picture.id', picture.id);
+picture.title = 'Nuevo titulo'; // private, set title('Nuevo titulo');
+album.title = 'Personal Activities'; // private, set title('Personal Activities');
+console.log('album', album);
+
+// Probar miembro estatico
+console.log('PhotoOrientation', Picture.photoOrientation.Landscape);

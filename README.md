@@ -1003,3 +1003,215 @@ picture.title = 'My picture'; // private, set title('My picture');
 ```
 
 Pareciera que estamos cambiando el valor de una propiedad privada, pero en realidad estamos llamando a un método de acceso internamente.
+
+## Herencia de clases y propiedades estáticas
+
+Typescript soporta este patrón común en el mundo de la POO. Implementa la habilidad de extender código de clases existentes a través de la palabra reservada ``extends``.
+
+```typescript
+export { }
+
+enum PhotoOrientation {
+    Landscape,
+    Portrait,
+    Square,
+    Panorama,
+}
+
+// SuperClase
+class Item {
+    protected _id: number;
+    protected _title: string;
+
+    constructor(id: number, title: string) {
+        this._id = id;
+        this._title = title;
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    set id(id: number) {
+        this._id = id;
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(title: string) {
+        this._title = title;
+    }
+}
+
+// get y set
+
+class Picture extends Item {
+    // Propiedades
+    private _orientation: PhotoOrientation;
+
+    // Constructor
+    public constructor(
+        id: number,
+        title: string,
+        orientation: PhotoOrientation
+    ) {
+        super(id, title);
+        this._orientation = orientation;
+    }
+
+    get orientation() {
+        return this._orientation;
+    }
+
+    set orientation(orientation: PhotoOrientation) {
+        this._orientation = orientation;
+    }
+
+    // Métodos
+    public toString() {
+        return `[id: ${this.id},
+             title: ${this.title}, 
+             orientation: ${this.orientation}]`;
+    }
+}
+
+class Album extends Item {
+    private _pictures: Picture[];
+
+    public constructor(id: number, title: string) {
+        super(id, title);
+        this._pictures = [];
+    }
+
+    public addPicture(picture: Picture) {
+        this._pictures.push(picture);
+    }
+    
+}
+```
+
+## Clases Abstractas
+
+Las ``clases Abstractas`` son la base de donde otras clases podrían derivarse. A diferencia de una ``Interfaz``, una clase abstracta puede implementar funciones para sus instancias.
+
+La palabra reservada ``abstract`` define una clase abstracta.
+
+Las clases abstractas no pueden ser instanciadas. Se usan para definir una clase base para otras clases derivadas, debido a esto no nos interesa instanciar una clase de este tipo, ya que no tiene mucho sentido.
+
+```typescript
+abstract class Item {
+    protected _id: number;
+    protected _title: string;
+}
+```
+
+## Propiedades Estáticas y propiedades de Solo Lectura
+
+Las clases por lo general definen atributos y métodos aplicables a las instancias de las mismas.
+
+A través de la palabra reservada ``static`` se pueden definir un miembro visible a nivel de clase.
+
+Al igual que las interfaces, podemos usar la palabra reservada ``readonly`` para marcar el miembro de una clase como solo lectura.
+
+```typescript
+export { }
+
+enum PhotoOrientation {
+    Landscape,
+    Portrait,
+    Square,
+    Panorama,
+}
+
+// SuperClase
+abstract class Item {
+    protected readonly _id: number;
+    protected _title: string;
+
+    constructor(id: number, title: string) {
+        this._id = id;
+        this._title = title;
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(title: string) {
+        this._title = title;
+    }
+}
+
+// get y set
+
+class Picture extends Item {
+    public static photoOrientation = PhotoOrientation;
+    // Propiedades
+    private _orientation: PhotoOrientation;
+
+    // Constructor
+    public constructor(
+        id: number,
+        title: string,
+        orientation: PhotoOrientation
+    ) {
+        super(id, title);
+        this._orientation = orientation;
+    }
+
+    get orientation() {
+        return this._orientation;
+    }
+
+    set orientation(orientation: PhotoOrientation) {
+        this._orientation = orientation;
+    }
+
+    // Métodos
+    public toString() {
+        return `[id: ${this.id},
+             title: ${this.title}, 
+             orientation: ${this.orientation}]`;
+    }
+}
+
+class Album extends Item {
+    private _pictures: Picture[];
+
+    public constructor(id: number, title: string) {
+        super(id, title);
+        this._pictures = [];
+    }
+
+    public addPicture(picture: Picture) {
+        this._pictures.push(picture);
+    }
+    
+}
+
+const album: Album = new Album(1, 'Personal Pictures');
+const picture: Picture = new Picture(1, 'my photos', PhotoOrientation.Square);
+album.addPicture(picture);
+
+console.log('Album' ,album);
+
+// Accediendo a los miembros publicos
+console.log('picture.id', picture.id);
+picture.title = 'Nuevo titulo'; // private, set title('Nuevo titulo');
+album.title = 'Personal Activities'; // private, set title('Personal Activities');
+console.log('album', album);
+
+// Probar miembro estatico
+console.log('PhotoOrientation', Picture.photoOrientation.Landscape);
+```
+
+- ``abstract``: cuando requieres que una clase no sea instanciada, pero que pueda ser derivada.
+- ``protected``: atributo visible a nivel de clase y a nivel de quienes hereden de la clase con la palabra reservada ``extends``.
+- ``readonly``: atributo que solo puede ser leido, no puede ser modificado.
+- ``static``: para poder acceder a métodos/propiedades de una clase sin la necesidad de la instanciar.
