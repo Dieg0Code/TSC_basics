@@ -1344,3 +1344,19 @@ Ejemplo de como usar una clase:
 ![node import relativo](./img/node-import-relativo.png)
 
 ![node import no relativo](./img/node-import-no-relativo.png)
+
+Tambien existen los path alias para que no tengamos que lidiar con esa mano de puntos y slash en nuestros proyectos.
+Esta configuración la pueden poner en el tsconfig.json dentro de compilerOptions y así pueden acceder al shortcut @item para llegar a esa carpeta en específico que están buscando.
+Para el ejemplo yo tengo una carpeta item y dentro el archivo index.ts.
+
+```typescript
+"paths": {
+    "@item": ["item/index.ts"],
+}
+```
+
+y así se podría importar:
+
+```typescript
+import { Item } from "@item";
+```
