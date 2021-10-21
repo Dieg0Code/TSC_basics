@@ -7,11 +7,13 @@ enum PhotoOrientation {
     Panorama,
 }
 
+// get y set
+
 class Picture {
     // Propiedades
-    #id: number;
-    #title: string;
-    #orientation: PhotoOrientation;
+    private _id: number;
+    private _title: string;
+    private _orientation: PhotoOrientation;
 
     // Constructor
     public constructor(
@@ -19,32 +21,56 @@ class Picture {
         title: string,
         orientation: PhotoOrientation
     ) {
-        this.#id = id;
-        this.#title = title;
-        this.#orientation = orientation;
+        this._id = id;
+        this._title = title;
+        this._orientation = orientation;
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    set id(id: number) {
+        this._id = id;
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(title: string) {
+        this._title = title;
+    }
+
+    get orientation() {
+        return this._orientation;
+    }
+
+    set orientation(orientation: PhotoOrientation) {
+        this._orientation = orientation;
     }
 
     // Métodos
     public toString() {
-        return `[id: ${this.#id},
-             title: ${this.#title}, 
-             orientation: ${this.#orientation}]`;
+        return `[id: ${this.id},
+             title: ${this.title}, 
+             orientation: ${this.orientation}]`;
     }
 }
 
 class Album {
-    #id: number;
-    #title: string;
-    #pictures: Picture[];
+    public id: number;
+    public title: string;
+    public pictures: Picture[];
 
     public constructor(id: number, title: string) {
-        this.#id = id;
-        this.#title = title;
-        this.#pictures = [];
+        this.id = id;
+        this.title = title;
+        this.pictures = [];
     }
 
-    public addPicture(picture: Picture) {
-        this.#pictures.push(picture);
+    addPicture(picture: Picture) {
+        this.pictures.push(picture);
     }
 }
 

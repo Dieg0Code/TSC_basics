@@ -946,3 +946,60 @@ class Person {
     }
 }
 ```
+
+## Clases Métodos Set y Get
+
+Typescript soporta los métodos de acceso ``set`` y ``get`` como una forma de interceptar los accesos a los miembros privados de un objeto.
+
+```typescript
+class Picture {
+    // Propiedades
+    private _id: number;
+    private _title: string;
+    private _orientation: PhotoOrientation;
+
+    // Constructor
+    public constructor(
+        id: number,
+        title: string,
+        orientation: PhotoOrientation
+    ) {
+        this._id = id;
+        this._title = title;
+        this._orientation = orientation;
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    set id(id: number) {
+        this._id = id;
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(title: string) {
+        this._title = title;
+    }
+
+    get orientation() {
+        return this._orientation;
+    }
+
+    set orientation(orientation: PhotoOrientation) {
+        this._orientation = orientation;
+    }
+}
+```
+
+Al hacer esto podemos acceder a los miembros privados de una manera más segura.
+
+```typescript
+picture.id = 100; // private, set id(100);
+picture.title = 'My picture'; // private, set title('My picture');
+```
+
+Pareciera que estamos cambiando el valor de una propiedad privada, pero en realidad estamos llamando a un método de acceso internamente.
